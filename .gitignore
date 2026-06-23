@@ -1,3 +1,12 @@
+#Testing 
+stb_*.c
+stb_*.h
+test_*.c
+test_*.h
+*.py
+*.png 
+*.jpg
+*.jpeg
 # Prerequisites
 *.d
 
@@ -15,7 +24,7 @@
 # Precompiled Headers
 *.gch
 *.pch
-
+*.out
 # Libraries
 *.lib
 *.a
