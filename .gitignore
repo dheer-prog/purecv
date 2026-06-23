@@ -7,6 +7,7 @@ test_*.h
 *.png 
 *.jpg
 *.jpeg
+*.p
 # Prerequisites
 *.d
 
