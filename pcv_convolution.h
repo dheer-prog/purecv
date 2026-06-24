@@ -75,37 +75,29 @@ int convolve(
     int kernel_half_width;
     int kernel_half_height;
     int y;
-
     if (!input || !kernel || !output || width <= 0 || height <= 0 ||
         k_width <= 0 || k_height <= 0 || stride <= 0) {
         return 1;
     }
-
     for (y = 0; y < k_height; ++y) {
         int x;
-
         for (x = 0; x < k_width; ++x) {
             kernel_sum += kernel[(y * k_width) + x];
         }
     }
-
     if (kernel_sum == 0) {
         kernel_sum = 1;
     }
-
     kernel_half_width = k_width / 2;
     kernel_half_height = k_height / 2;
 
     for (y = 0; y < height; y += stride) {
         int x;
-
         for (x = 0; x < width; x += stride) {
             int total_val = 0;
             int ky;
-
             for (ky = 0; ky < k_height; ++ky) {
                 int kx;
-
                 for (kx = 0; kx < k_width; ++kx) {
                     int sample_x = x + kx - kernel_half_width;
                     int sample_y = y + ky - kernel_half_height;

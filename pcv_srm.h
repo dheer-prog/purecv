@@ -142,7 +142,7 @@ static void srm_smooth_img(
 static void srm_calc_deriv(
     int height,
     int width,
-    const unsigned char (*img)[width],
+    unsigned char (*img)[width],
     int (*diff)[width][2]
 ) {
     int y;
@@ -160,6 +160,9 @@ static void srm_calc_deriv(
 }
 
 int srm_segment(const unsigned char *original_data, int width, int height, int q, unsigned char *output) {
+    if (!original_data || !output || width <= 0 || height <= 0 || q <= 0) {
+        return 1;
+    }
     const unsigned char (*img)[width];
     const int edge_capacity = (height * (width - 1)) + ((height - 1) * width);
     unsigned char smoothed[height][width];
@@ -169,10 +172,6 @@ int srm_segment(const unsigned char *original_data, int width, int height, int q
     int edge_count = 0;
     int pixel_index = 0;
     int y;
-
-    if (!original_data || !output || width <= 0 || height <= 0 || q <= 0) {
-        return 1;
-    }
 
     img = (const unsigned char (*)[width])original_data;
     srm_smooth_img(1, width, height, img, smoothed);
