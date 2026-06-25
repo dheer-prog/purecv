@@ -1,3 +1,13 @@
+/*
+Currently requires maths library hence requires the -lm flag
+
+use:- 
+#define PCV_SRM_IMPLEMENT 
+#include "pcv_srm.h"
+Now you can use the functions of this file 
+*/
+
+
 #ifndef SRM_H
 #define SRM_H
 
