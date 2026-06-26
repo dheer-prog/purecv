@@ -82,7 +82,7 @@ int convolve_U8(
     int padding
 ) {
     int output_index = 0;
-    int kernel_sum = 0;
+    float kernel_sum = 0.0f;
     int kernel_half_width;
     int kernel_half_height;
     int y;
@@ -96,8 +96,8 @@ int convolve_U8(
             kernel_sum += kernel[(y * k_width) + x];
         }
     }
-    if (kernel_sum == 0) {
-        kernel_sum = 1;
+    if (kernel_sum == 0.0f) {
+        kernel_sum = 1.0f;
     }
     kernel_half_width = k_width / 2;
     kernel_half_height = k_height / 2;
@@ -105,7 +105,7 @@ int convolve_U8(
     for (y = 0; y < height; y += stride) {
         int x;
         for (x = 0; x < width; x += stride) {
-            int total_val = 0;
+            float total_val = 0.0f;
             int ky;
             for (ky = 0; ky < k_height; ++ky) {
                 int kx;
@@ -116,18 +116,18 @@ int convolve_U8(
                     unsigned char sample =
                         pcv_convolution_sample(input, width, height, sample_x, sample_y, padding);
 
-                    total_val += (int)kernel[kernel_index] * (int)sample;
+                    total_val += kernel[kernel_index] * (float)sample;
                 }
             }
 
             total_val /= kernel_sum;
-            if (total_val < 0) {
-                total_val = 0;
-            } else if (total_val > 255) {
-                total_val = 255;
+            if (total_val < 0.0f) {
+                total_val = 0.0f;
+            } else if (total_val > 255.0f) {
+                total_val = 255.0f;
             }
 
-            output[output_index++] = (unsigned char)total_val;
+            output[output_index++] = (unsigned char)(total_val + 0.5f);
         }
     }
 
@@ -146,7 +146,6 @@ int convolve_F(
     int padding
 ) {
     int output_index = 0;
-    int kernel_sum = 0;
     int kernel_half_width;
     int kernel_half_height;
     int y;
@@ -154,22 +153,13 @@ int convolve_F(
         k_width <= 0 || k_height <= 0 || stride <= 0) {
         return 1;
     }
-    for (y = 0; y < k_height; ++y) {
-        int x;
-        for (x = 0; x < k_width; ++x) {
-            kernel_sum += kernel[(y * k_width) + x];
-        }
-    }
-    if (kernel_sum == 0) {
-        kernel_sum = 1;
-    }
     kernel_half_width = k_width / 2;
     kernel_half_height = k_height / 2;
 
     for (y = 0; y < height; y += stride) {
         int x;
         for (x = 0; x < width; x += stride) {
-            int total_val = 0;
+            float total_val = 0.0f;
             int ky;
             for (ky = 0; ky < k_height; ++ky) {
                 int kx;
@@ -180,18 +170,11 @@ int convolve_F(
                     unsigned char sample =
                         pcv_convolution_sample(input, width, height, sample_x, sample_y, padding);
 
-                    total_val += (int)kernel[kernel_index] * (int)sample;
+                    total_val += kernel[kernel_index] * (float)sample;
                 }
             }
 
-            total_val /= kernel_sum;
-            if (total_val < 0) {
-                total_val = 0;
-            } else if (total_val > 255) {
-                total_val = 255;
-            }
-
-            output[output_index++] = (float)total_val;
+            output[output_index++] = total_val;
         }
     }
 
