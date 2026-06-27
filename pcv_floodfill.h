@@ -13,7 +13,7 @@ The seeds are expected in y,x format
 #ifdef __cplusplus
 extern "C" {
 #endif
-int floodfill(
+int pcv_floodfill(
     const unsigned char* input, 
     int width, 
     int height,
@@ -29,7 +29,7 @@ int floodfill(
 #endif
 
 #ifdef PCV_FLOODFILL 
-int floodfill(
+int pcv_floodfill(
     const unsigned char* input, 
     int width, 
     int height,

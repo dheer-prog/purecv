@@ -13,7 +13,7 @@ Currently this only works for grayscale images.
 extern "C" {
 #endif
 
-int convolve_U8(
+int pcv_convolve_U8(
     const unsigned char *input,
     int width,
     int height,
@@ -25,7 +25,7 @@ int convolve_U8(
     int padding
 );
 
-int convolve_F(
+int pcv_convolve_F(
     const unsigned char *input,
     int width,
     int height,
@@ -71,7 +71,7 @@ static unsigned char pcv_convolution_sample(
 
     return input[(y * width) + x];
 }
-int convolve_U8(
+int pcv_convolve_U8(
     const unsigned char *input,
     int width,
     int height,
@@ -135,7 +135,7 @@ int convolve_U8(
     return 0;
 }
 
-int convolve_F(
+int pcv_convolve_F(
     const unsigned char *input,
     int width,
     int height,

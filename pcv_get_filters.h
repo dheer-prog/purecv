@@ -11,7 +11,7 @@ and mean=0
 extern "C" {
 #endif
 
-int get_filters(
+int pcv_get_filters(
     int n,
     float *output,
     char* filter
@@ -117,7 +117,7 @@ static int compare_string(char* n1,char* n2){
     if(n1[i]=='\0' && n2[i]=='\0'){return 0;}
     return 1;
 }
-int get_filters(
+int pcv_get_filters(
     int n,
     float *output, 
     char* filter

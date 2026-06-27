@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-int convert_gray(unsigned char* input,int width,int height,unsigned char* output); 
+int pcv_convert_gray(unsigned char* input,int width,int height,unsigned char* output); 
 
 #ifdef __cplusplus
 }
@@ -19,7 +19,7 @@ int convert_gray(unsigned char* input,int width,int height,unsigned char* output
 #include<stdlib.h>
 #ifdef PCV_CONVERT_GRAY
 
-int convert_gray(unsigned char* input,int width,int height,unsigned char* output){
+int pcv_convert_gray(unsigned char* input,int width,int height,unsigned char* output){
     int output_index=0; 
     for(int y=0;y<(width*height*3);y=y+3){
         float t=(0.299*(float)input[y])+(0.587*(float)input[y+1])+(0.114*(float)input[y+2]);

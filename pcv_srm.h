@@ -15,7 +15,7 @@ Now you can use the functions of this file
 extern "C" {
 #endif
 
-int srm_segment(const unsigned char *original_data, int width, int height, int q, unsigned char *output);
+int pcv_srm_segment(const unsigned char *original_data, int width, int height, int q, unsigned char *output);
 
 #ifdef __cplusplus
 }
@@ -169,7 +169,7 @@ static void srm_calc_deriv(
     }
 }
 
-int srm_segment(const unsigned char *original_data, int width, int height, int q, unsigned char *output) {
+int pcv_srm_segment(const unsigned char *original_data, int width, int height, int q, unsigned char *output) {
     if (!original_data || !output || width <= 0 || height <= 0 || q <= 0) {
         return 1;
     }

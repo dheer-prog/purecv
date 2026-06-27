@@ -28,7 +28,7 @@ extern "C" {
 #ifndef INT_MAX
 #define INT_MAX  
 #endif
-int general_norm(void* input,
+static int general_norm(void* input,
 int height,
 int width, 
 int bottom, 
