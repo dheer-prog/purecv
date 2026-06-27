@@ -2,6 +2,7 @@
 The caller is responsible for allocating the output buffer for the current
 image dimensions and selected stride.
 
+convolve_F gives floating point output upto the user to normalize that 
 Currently this only works for grayscale images.
 */
 
