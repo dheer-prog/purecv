@@ -25,7 +25,7 @@ int pcv_get_filters(
 
  
  
-static float pcv_get_e_power(float p){
+float pcv_get_e_power(float p){
     float num=1.0f;
     float denum=1.0f;
     float ans=0.0f; 
@@ -37,7 +37,7 @@ static float pcv_get_e_power(float p){
     }
     return ans;
 }
-static void pcv_get_gaussian(int n,float (*out)[n]){
+void pcv_get_gaussian(int n,float (*out)[n]){
     float PI=3.14159265f; 
     for(int y=-(n/2);y<=(n/2);y++){
         for(int x=-(n/2);x<=(n/2);x++){
@@ -48,7 +48,7 @@ static void pcv_get_gaussian(int n,float (*out)[n]){
     }
 }
 
-static void pcv_get_pascal_row(float* smooth,int n){
+void pcv_get_pascal_row(float* smooth,int n){
     float num=1.0f; 
     float denum=1.0f;
     smooth[0]=1; 
@@ -59,7 +59,7 @@ static void pcv_get_pascal_row(float* smooth,int n){
     }
 }
 
-static void pcv_get_derv(float* derv,int n){
+void pcv_get_derv(float* derv,int n){
     int i;
     float smoother[n - 2];
 
@@ -77,7 +77,7 @@ static void pcv_get_derv(float* derv,int n){
     }
 }
 
-static void pcv_get_sobel_x(int n,float (*out)[n]){
+void pcv_get_sobel_x(int n,float (*out)[n]){
     float dev[n]; 
     float smooth[n];
     if(n==3){
@@ -98,7 +98,7 @@ static void pcv_get_sobel_x(int n,float (*out)[n]){
         }
     }
 }
-static void pcv_get_sobel_y(int n,float(*out)[n]){
+void pcv_get_sobel_y(int n,float(*out)[n]){
     pcv_get_sobel_x(n,out); 
     for(int y=0;y<n;y++){
         for(int x=y+1;x<n;x++){
@@ -109,7 +109,7 @@ static void pcv_get_sobel_y(int n,float(*out)[n]){
         }
     }
 }
-static int pcv_compare_string(char* n1,char* n2){
+int pcv_compare_string(char* n1,char* n2){
     int i =0;
     while(n1[i]!='\0' && n2[i]!='\0'){
         if(n1[i]!=n2[i]){return 1;}

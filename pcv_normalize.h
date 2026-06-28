@@ -28,7 +28,7 @@ extern "C" {
 #ifndef INT_MAX
 #define INT_MAX  
 #endif
-static int pcv_general_norm(void* input,
+int pcv_general_norm(void* input,
 int height,
 int width, 
 int bottom, 

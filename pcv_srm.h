@@ -30,7 +30,7 @@ int pcv_srm_segment(const unsigned char *original_data, int width, int height, i
 #ifndef FLOAT_MAX
 #define FLOAT_MAX 3.402823466e+38f
 #endif
-static float pcv_sqrtf(float x) {
+float pcv_sqrtf(float x) {
     if (x <= 0.0f) {
         return 0.0f;
     }
@@ -58,7 +58,7 @@ static float pcv_sqrtf(float x) {
     return y;
 }
 
-static float pcv_cross_platform_fast_sqrtf(float x) {
+ float pcv_cross_platform_fast_sqrtf(float x) {
     // #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__)
     //     // 1. Intel/AMD x86 implementation
     //     __m128 reg = _mm_set_ss(x);
@@ -91,14 +91,14 @@ static float pcv_cross_platform_fast_sqrtf(float x) {
  
  
 
-static void pcv_swap(int* a, int* b) {
+ void pcv_swap(int* a, int* b) {
     int t = *a;
     *a = *b;
     *b = t;
 }
 
 // partition function
-static int pcv_partition(int arr[], int low, int high) {
+ int pcv_partition(int arr[], int low, int high) {
     
     // Choose the pivot
     int pivot = arr[high];
@@ -124,7 +124,7 @@ static int pcv_partition(int arr[], int low, int high) {
 }
 
 // The QuickSort function implementation
-static void pcv_qsort(int arr[], int low, int high) {
+ void pcv_qsort(int arr[], int low, int high) {
     if (low < high) {
         
         // pi is the partition return index of pivot
@@ -137,7 +137,7 @@ static void pcv_qsort(int arr[], int low, int high) {
     }
 }
 
-static int pcv_get_digits(float* num){ 
+ int pcv_get_digits(float* num){ 
     int p=1; 
     int count=0;
     while((int)(*num)/p>0){
@@ -147,7 +147,7 @@ static int pcv_get_digits(float* num){
     *num=(*num)/(float)p; 
     return count;
 }
-static float pcv_logf(float num){
+ float pcv_logf(float num){
     if(num==0){
         return -FLOAT_MAX; 
     }
@@ -164,7 +164,7 @@ static float pcv_logf(float num){
         }
         x=x*og_x; 
     } 
-    static const float  len_ten=2.30258509299f; 
+     const float  len_ten=2.30258509299f; 
     return total+((float)mul*len_ten); 
 }
 
@@ -182,36 +182,36 @@ struct srm_region {
     int is_boundary;
 };
 
-static float pcv_ABSf(float value) {
+ float pcv_ABSf(float value) {
     return (value < 0.0f) ? -value : value;
 }
 
-static int pcv_srm_max(int a, int b) {
+ int pcv_srm_max(int a, int b) {
     return (a > b) ? a : b;
 }
 
-static int pcv_srm_min(int a, int b) {
+ int pcv_srm_min(int a, int b) {
     return (a < b) ? a : b;
 }
 
-static float pcv_srm_delta_log(int height, int width) {
+ float pcv_srm_delta_log(int height, int width) {
     float pixel_count = (float)height * (float)width;
     return -(pcv_logf(6.0f) + 2.0f * pcv_logf(pixel_count));
 }
 
-static float pcv_srm_br(int height, int width, struct srm_region region, int q) {
+ float pcv_srm_br(int height, int width, struct srm_region region, int q) {
     float log_term = pcv_logf((float)region.size) - pcv_srm_delta_log(height, width);
     float denom = 2.0f * (float)q * (float)region.size;
     return 256.0f * pcv_cross_platform_fast_sqrtf(log_term / denom);
 }
 
-static int pcv_srm_cmp_p_error(const void *a, const void *b) {
+ int pcv_srm_cmp_p_error(const void *a, const void *b) {
     const struct srm_p_error *left = (const struct srm_p_error *)a;
     const struct srm_p_error *right = (const struct srm_p_error *)b;
     return (left->error > right->error) - (left->error < right->error);
 }
 
-static int pcv_srm_find(struct srm_region *regions, int index) {
+ int pcv_srm_find(struct srm_region *regions, int index) {
     int root = index;
 
     while (regions[root].parent != root) {
@@ -227,7 +227,7 @@ static int pcv_srm_find(struct srm_region *regions, int index) {
     return root;
 }
 
-static void pcv_srm_unite(struct srm_region *regions, int left_root, int right_root) {
+ void pcv_srm_unite(struct srm_region *regions, int left_root, int right_root) {
     int size_left;
     int size_right;
 
@@ -252,7 +252,7 @@ static void pcv_srm_unite(struct srm_region *regions, int left_root, int right_r
     regions[left_root].size += size_right;
 }
 
-static void pcv_srm_compare(struct srm_region *regions, int left_root, int right_root, int height, int width, int q) {
+ void pcv_srm_compare(struct srm_region *regions, int left_root, int right_root, int height, int width, int q) {
     float bound_left = pcv_srm_br(height, width, regions[left_root], q);
     float bound_right = pcv_srm_br(height, width, regions[right_root], q);
     float threshold = pcv_cross_platform_fast_sqrtf((bound_left * bound_left) + (bound_right * bound_right));
@@ -262,7 +262,7 @@ static void pcv_srm_compare(struct srm_region *regions, int left_root, int right
     }
 }
 
-static void pcv_srm_smooth_img(
+ void pcv_srm_smooth_img(
     int center_weight,
     int width,
     int height,
@@ -294,7 +294,7 @@ static void pcv_srm_smooth_img(
     }
 }
 
-static void pcv_srm_calc_deriv(
+ void pcv_srm_calc_deriv(
     int height,
     int width,
     unsigned char (*img)[width],

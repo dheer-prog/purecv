@@ -43,7 +43,7 @@ int pcv_convolve_F(
 
 #ifdef PCV_CONVOLUTION
 
-static unsigned char pcv_convolution_sample(
+unsigned char pcv_convolution_sample(
     const unsigned char *input,
     int width,
     int height,
