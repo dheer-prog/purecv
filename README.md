@@ -78,28 +78,12 @@ Note:
 
 ## Build / Usage Notes
 
-`pcv_get_filters.h`
-- `output` must point to space for `n * n` floats.
-
-`pcv_convolution.h`
-- Expects grayscale input buffers.
-- `input`, `kernel`, and `output` must be valid.
-- `stride` must be positive.
-
 `pcv_convert_gray.h`
 - Expects a flat RGB byte layout:
   `RGBRGBRGB...`
-- `output` must have room for `width * height` bytes.
-
 `pcv_floodfill.h`
 - Seed points are expected in `(y, x)` order.
 - Current implementation supports 4-way flood fill.
-
-`pcv_srm.h`
-- The current implementation uses internal helper routines for sorting,
-  logarithm approximation, and square-root approximation.
-
 `pcv_normalize.h`
 - Assumes IEEE 754 floating-point layout.
-- The current implementation returns `1` if `width == 0`, `height == 0`,
-  `bottom == 0`, `upp == 0`, or `upp < bottom`.
+
