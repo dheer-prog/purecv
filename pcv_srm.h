@@ -22,7 +22,18 @@ int pcv_srm_segment(const unsigned char *original_data, int width, int height, i
 #endif
 
 #ifdef PCV_SRM_IMPLEMENT
- 
+struct srm_p_error {
+    int p1;
+    int p2;
+    int error;
+};
+
+struct srm_region {
+    int parent;
+    int mean;
+    int size;
+    int is_boundary;
+};
 
 #ifndef ABS 
 #define ABS(a)(((a)<0)?(-a):(a))
@@ -91,17 +102,17 @@ float pcv_sqrtf(float x) {
  
  
 
- void pcv_swap(int* a, int* b) {
-    int t = *a;
+ void pcv_swap_p_error(struct srm_p_error* a, struct srm_p_error* b) {
+    struct srm_p_error t = *a;
     *a = *b;
     *b = t;
 }
 
 // partition function
- int pcv_partition(int arr[], int low, int high) {
+ int pcv_partition_p_error(struct srm_p_error arr[], int low, int high) {
     
     // Choose the pivot
-    int pivot = arr[high];
+    int pivot = arr[high].error;
     
     // Index of smaller element and indicates 
     // the right position of pivot found so far
@@ -111,29 +122,29 @@ float pcv_sqrtf(float x) {
     // elements to the left side. Elements from low to 
     // i are smaller after every iteration
     for (int j = low; j <= high - 1; j++) {
-        if (arr[j] < pivot) {
+        if (arr[j].error < pivot) {
             i++;
-            pcv_swap(&arr[i], &arr[j]);
+            pcv_swap_p_error(&arr[i], &arr[j]);
         }
     }
     
     // Move pivot after smaller elements and
     // return its position
-    pcv_swap(&arr[i + 1], &arr[high]);  
+    pcv_swap_p_error(&arr[i + 1], &arr[high]);  
     return i + 1;
 }
 
 // The QuickSort function implementation
- void pcv_qsort(int arr[], int low, int high) {
+ void pcv_qsort_p_error(struct srm_p_error arr[], int low, int high) {
     if (low < high) {
         
         // pi is the partition return index of pivot
-        int pi = pcv_partition(arr, low, high);
+        int pi = pcv_partition_p_error(arr, low, high);
 
         // recursion calls for smaller elements
-        // and greater or equals elements
-        pcv_qsort(arr, low, pi - 1);
-        pcv_qsort(arr, pi + 1, high);
+        // and greater or equals elements on
+        pcv_qsort_p_error(arr, low, pi - 1);
+        pcv_qsort_p_error(arr, pi + 1, high);
     }
 }
 
@@ -169,18 +180,7 @@ float pcv_sqrtf(float x) {
 }
 
 
-struct srm_p_error {
-    int p1;
-    int p2;
-    int error;
-};
 
-struct srm_region {
-    int parent;
-    int mean;
-    int size;
-    int is_boundary;
-};
 
  float pcv_ABSf(float value) {
     return (value < 0.0f) ? -value : value;
@@ -354,7 +354,7 @@ int pcv_srm_segment(const unsigned char *original_data, int width, int height, i
         }
     }
 
-    pcv_qsort(graph, (size_t)edge_count, sizeof(*graph), pcv_srm_cmp_p_error);
+    pcv_qsort_p_error(graph, 0, edge_count - 1);
 
     pixel_index = 0;
     for (y = 0; y < height; ++y) {
