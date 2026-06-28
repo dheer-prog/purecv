@@ -1,5 +1,5 @@
 /*
-gcc -std=c11 -ffreestanding -fno-builtin -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wstrict-prototypes  -Wunused-parameter -Wfloat-conversion -c test_free.c -o test_free.o
+gcc -std=c11 -ffreestanding -fno-builtin -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wstrict-prototypes  -Wunused-parameter -Wfloat-conversion test_free.c -o test_free.o
 Use the above compiler flags to test
  
 */
