@@ -12,9 +12,9 @@ from PIL import Image
 def main() -> int:
     
 
-    with Image.open("coins.png") as image:
+    with Image.open("test_images/coins.png") as image:
         grayscale = image.convert("L")
-        grayscale.save("coins_gray.png")
+        grayscale.save("test_images/coins_gray.png")
 
     print(f"Wrote grayscale image to")
     return 0
