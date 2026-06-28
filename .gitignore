@@ -1,14 +1,4 @@
-#Testing 
-stb_*.c
-stb_*.h
-test_*.c
-test_*.h
-*test*
-*.py
-*.png 
-*.jpg
-*.jpeg
-*.p
+
 # Prerequisites
 *.d
 

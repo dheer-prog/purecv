@@ -1,5 +1,5 @@
 /*
-
+This assume IEEE 754 format 
 */
 
 #ifndef FLOAT_MAX
@@ -28,7 +28,7 @@ extern "C" {
 #ifndef INT_MAX
 #define INT_MAX  
 #endif
-static int general_norm(void* input,
+static int pcv_general_norm(void* input,
 int height,
 int width, 
 int bottom, 
