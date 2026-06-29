@@ -12,7 +12,12 @@ This assume IEEE 754 format
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+int pcv_general_norm(void* input,
+int height,
+int width, 
+int bottom, 
+int upp,
+int input_type);
 
 #ifdef __cplusplus
 }

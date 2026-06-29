@@ -81,11 +81,10 @@ Note:
 `pcv_convert_gray.h`
 - Expects a flat RGB byte layout:
   `RGBRGBRGB...`
-
+  
 `pcv_floodfill.h`
 - Seed points are expected in `(y, x)` order.
 - Current implementation supports 4-way flood fill.
-
 `pcv_normalize.h`
 - Assumes IEEE 754 floating-point layout.
 
